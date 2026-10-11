@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sika-noppapeli</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="sivu">
+    <header>
+      <p class="ylateksti">Heitä, kerää ja päätä ajoissa!</p>
+      <h1>Sika-noppapeli</h1>
+      <p>Pelaa yhdellä tai kahdella nopalla samalla laitteella.</p>
+    </header>
+
+    <section class="kortti" id="asetukset" aria-labelledby="asetustenOtsikko">
+      <h2 id="asetustenOtsikko">Uusi peli</h2>
+      <form id="aloitusLomake" novalidate>
+        <div class="asetusrivi">
+          <div class="kentta">
+            <label for="noppienMaara">Peliversio</label>
+            <select id="noppienMaara">
+              <option value="1">Yksi noppa</option>
+              <option value="2">Kaksi noppaa</option>
+            </select>
+          </div>
+          <div class="kentta">
+            <label for="pelaajienMaara">Pelaajien määrä (2–10)</label>
+            <input id="pelaajienMaara" type="text" inputmode="numeric" value="2">
+          </div>
+          <div class="kentta">
+            <label for="tavoite">Tavoitepisteet (1–10000)</label>
+            <input id="tavoite" type="text" inputmode="numeric" value="100">
+          </div>
+        </div>
+        <div id="nimikentat" class="nimikentat"></div>
+        <p id="asetusVirhe" class="virhe" role="alert"></p>
+        <button type="submit" class="ensisijainen">Aloita peli</button>
+      </form>
+    </section>
+
+    <section class="kortti" id="peli" hidden aria-labelledby="pelinOtsikko">
+      <div class="otsikkorivi">
+        <h2 id="pelinOtsikko">Peli</h2>
+        <span id="pelitiedot" class="merkki"></span>
+      </div>
+      <div id="pistetaulukko" class="pistetaulukko"></div>
+      <div class="vuoroalue">
+        <h3 id="vuoroOtsikko"></h3>
+        <p>Vuoron pisteet <strong id="vuoroPisteet">0</strong></p>
+        <p id="tuplatiedot" hidden>Peräkkäiset tuplat: <span id="tuplaMaara">0</span> / 3</p>
+        <div class="nopat" id="nopat" role="img" aria-label="Noppia ei ole vielä heitetty"></div>
+        <div class="toiminnot">
+          <button id="heita" type="button" class="ensisijainen">Heitä noppaa</button>
+          <button id="pida" type="button" class="toissijainen">Lopeta vuoro ja pidä pisteet</button>
+        </div>
+        <p id="peliviesti" class="peliviesti" role="status" aria-live="polite" aria-atomic="true"></p>
+        <button id="uusinta" type="button" class="toissijainen" hidden>Uusinta samoilla pelaajilla</button>
+      </div>
+      <h3>Viimeisimmät tapahtumat</h3>
+      <ol id="tapahtumat" class="tapahtumat"></ol>
+      <button id="asetuksiin" type="button" class="tekstinappi">Palaa asetuksiin – nykyinen peli päättyy</button>
+    </section>
+
+    <details class="kortti">
+      <summary>Pelin säännöt</summary>
+      <h2>Yksi noppa</h2>
+      <p>Heitot 2–6 kasvattavat vuoron pisteitä. Ykkönen nollaa vain nykyisen vuoron pisteet ja siirtää vuoron seuraavalle pelaajalle. Lopettamalla vuoron lisäät vuoron pisteet kokonaispisteisiisi.</p>
+      <h2>Kaksi noppaa</h2>
+      <p>Eri silmäluvut ilman ykköstä antavat noppien summan. Tuplat antavat kaksi kertaa noppien summan: esimerkiksi 3 + 3 antaa 12 pistettä. Kaksi ykköstä antaa 25 pistettä.</p>
+      <p>Jos vain toinen noppa on ykkönen, menetät nykyisen vuoron pisteet. Myös kolme peräkkäistä tuplaa saman vuoron aikana nollaa vuoron pisteet ja päättää vuoron. Kolmannen tuplan silmäluvulla ei ole merkitystä. Muut heitot katkaisevat tuplaputken.</p>
+      <h2>Voittaminen</h2>
+      <p>Ensimmäinen tavoitepisteet saavuttava pelaaja voittaa. Pisteet vahvistetaan vasta, kun pelaaja lopettaa vuoronsa. Pelaajat vuorottelevat samalla laitteella. Pelitilannetta ei tallenneta sivun päivityksen yli.</p>
+    </details>
+  </main>
+</body>
+</html>
